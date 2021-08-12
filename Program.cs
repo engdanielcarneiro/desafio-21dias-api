@@ -45,12 +45,12 @@ namespace console_desafio21dias_api
             //     Console.WriteLine("Opaaa estou por aqui!");
             // }
 
-            List<dynamic> alunos = new List<dynamic>();
+            List<Aluno> alunos = new List<Aluno>();
             while (true)
             {
                 var opcao = 0;
 
-                Console.WriteLine("Digite\n1 - para sair\n2 - para inserir alunos\n 3 - para mostrar os aprovados");
+                Console.WriteLine("Digite\n1 - Sair\n2 - Inserir alunos\n 3 - Checar situação dos alunos");
                 opcao = Convert.ToInt32(Console.ReadLine());
 
 
@@ -63,32 +63,32 @@ namespace console_desafio21dias_api
                 switch (opcao)
                 {
                     case 2:
+                        var novoAluno = new Aluno();
+
                         Console.WriteLine("Digite o nome do aluno: ");
-                        var nome = Console.ReadLine();
+                        novoAluno.Nome = Console.ReadLine();
 
-                        Console.WriteLine("Digite a nota do aluno: ");
-                        var nota = Console.ReadLine();
+                        Console.WriteLine("Digite a nota 1 do aluno: ");
+                        novoAluno.Notas.Add(Double.Parse(Console.ReadLine()));
 
-                        alunos.Add(new {
-                            Nome = nome,
-                            Nota = nota,
-                        });
+                        Console.WriteLine("Digite a nota 2 do aluno: ");
+                        novoAluno.Notas.Add(Double.Parse(Console.ReadLine()));
 
-                        Console.WriteLine("Dados inseridos:");
-                        foreach (var aluno in alunos)
-                        {
-                            Console.WriteLine($"Aluno: {aluno.Nome} / Nota: {aluno.Nota}");
-                        }
+                        Console.WriteLine("Digite a nota 3 do aluno: ");
+                        novoAluno.Notas.Add(Double.Parse(Console.ReadLine()));
+
+                        alunos.Add(novoAluno);
+
+                        Console.WriteLine("Dados inseridos");
 
                         break;
                     case 3:
                         foreach (var aluno in alunos)
                         {
-                            if(Convert.ToInt32(aluno.Nota) > 5){
-                                Console.WriteLine($"Aluno: {aluno.Nome}: Aprovado.");
-                            }
+                            Console.WriteLine($"Aluno: {aluno.Nome}: {aluno.Situacao()}");
+
                         }
-                        Console.WriteLine("Escrita de aprovados finalizada.");
+                        Console.WriteLine("------------------------------------------");
                         break;
                     default:
                         Console.WriteLine("Digite uma opção válida!");
